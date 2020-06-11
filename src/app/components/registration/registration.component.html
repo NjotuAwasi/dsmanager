@@ -1,0 +1,90 @@
+<div class="container">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill you School Information</ng-template>
+        <mat-form-field>
+          <input matInput name="name" placeholder="School Name" required formControlName="name"
+            [(ngModel)]="school.name">
+        </mat-form-field>
+        <mat-form-field style="margin-left: 6px;">
+          <input type="email" matInput name="email" placeholder="School Email" required formControlName="email"
+            [(ngModel)]="school.email">
+        </mat-form-field><br>
+        <mat-form-field>
+          <input type="text" matInput name="phone" placeholder="Phone Number" required formControlName="phone"
+            [(ngModel)]="school.phone">
+        </mat-form-field>
+        <mat-form-field style="margin-left: 6px;">
+          <input type="text" matInput name="city" placeholder="City" formControlName="city" [(ngModel)]="school.city">
+        </mat-form-field><br>
+        <mat-form-field>
+          <input type="text" matInput name="location" placeholder="Location" formControlName="location"
+            [(ngModel)]="school.location">
+        </mat-form-field><br>
+        <textarea matInput placeholder="Tell Us about your school*" formControlName="description"
+          [(ngModel)]="school.description"></textarea>
+        <div>
+          <button mat-raised-button matStepperNext required color="primary">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Add an Administrator</ng-template>
+        <mat-form-field>
+          <input matInput name="firstname" placeholder="First Name" formControlName="firstname"
+            [(ngModel)]="schooladministrator.users1.firstname">
+        </mat-form-field>
+        <mat-form-field style="margin-left: 6px;">
+          <input matInput name="lastname" placeholder="Last Name" formControlName="lastname"
+            [(ngModel)]="schooladministrator.users1.lastname">
+        </mat-form-field><br>
+        <mat-form-field>
+          <input matInput name="adminemail" placeholder="Email" formControlName="adminemail"
+            [(ngModel)]="schooladministrator.users1.email">
+        </mat-form-field>
+        <mat-form-field style="margin-left: 6px;">
+          <input matInput name="admin phone" placeholder="Phone" formControlName="adminphone"
+            [(ngModel)]="schooladministrator.users1.phone">
+        </mat-form-field><br>
+        <input matInput name="birthdate" [min]="minDate" formControlName="birthdate" [max]="maxDate"
+          [(ngModel)]="schooladministrator.users1.birthdate" [matDatepicker]="picker" placeholder="Birth Day">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+        <div>
+          Gender:
+          <input type="radio" name="gender" formControlName="gender" [(ngModel)]="schooladministrator.users1.gender"
+            value="male">Male
+          <input type="radio" name="gender" formControlName="gender" [(ngModel)]="schooladministrator.users1.gender"
+            value="female">Female
+        </div>
+        <mat-form-field>
+          <input matInput name="login" formControlName="login" placeholder="User Name"
+            [(ngModel)]="schooladministrator.users1.login" />
+        </mat-form-field>
+        <mat-form-field style="margin-left: 6px;">
+          <input type="password" matInput name="password" formControlName="password" placeholder="password"
+            [(ngModel)]="schooladministrator.users1.password" />
+        </mat-form-field>
+      </form>
+      <div>
+        <button mat-raised-button matStepperPrevious color="primary">Back</button>
+        <button style="margin-left: 6px;" mat-raised-button matStepperNext color="primary">Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finish</ng-template>
+      {{school.name}}
+      {{school.email}}
+      <div>
+        <button mat-raised-button color="primary" (click)="processForm()">submit</button>
+      </div>
+      <br>
+      <div>
+        <button mat-raised-button matStepperPrevious color="primary">Back</button>
+        <button style="margin-left: 6px;" mat-raised-button (click)="stepper.reset()" color = "warn">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

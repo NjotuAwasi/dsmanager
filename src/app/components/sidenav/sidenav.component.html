@@ -1,0 +1,124 @@
+<app-header [inputSideNav]="inputSideNav"></app-header>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav opened
+    #inputSideNav
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [fixedInViewport]="mobileQuery.matches"
+    fixedTopGap="56"
+    [style.width]="mobileQuery.matches ? '75%' : '15%'"
+  ><br>
+    <span style="text-align: center; color: white">
+      {{session.userroleList[0].role1.name}}
+    </span>
+    <mat-nav-list>
+      <a
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/dashboard"
+      >
+        <mat-icon color="white">dashboard</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.DASHBOARD" | translate }}</span
+        >
+      </a>
+      <a *ngIf="schooladmin || instructor || manager ||admin"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/students"
+      >
+        <mat-icon color="white">contacts</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.STUDENTS" | translate }}</span
+        >
+      </a>
+      <a *ngIf="schooladmin || admin || manager"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/instructors"
+      >
+        <mat-icon color="white">supervisor_account</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.INSTRUCTORS" | translate }}</span
+        >
+      </a>
+      <a *ngIf="schooladmin || student || instructor || manager"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/schedule"
+      >
+        <mat-icon color="white">schedule</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.SCHEDULE" | translate }}</span
+        >
+      </a>
+      <a *ngIf="schooladmin"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/branches"
+      >
+        <mat-icon color="white">location_city</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.BRANCHES" | translate }}</span
+        >
+      </a>
+      <a *ngIf="schooladmin"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/fleet"
+      >
+        <mat-icon color="white">directions_car</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.FLEET" | translate }}</span
+        >
+      </a>
+      <a *ngIf="schooladmin || manager"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/courses"
+      >
+        <mat-icon color="white">library_books</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.COURSES" | translate }}</span
+        >
+      </a>
+      <a *ngIf="schooladmin || manager"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/session"
+      >
+        <mat-icon color="white">av_timer</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; {{ "HOME.SESSION" | translate }}</span
+        >
+      </a>
+      <a *ngIf="student"
+        class="hover"
+        routerLinkActive="active-list-item"
+        mat-list-item
+        routerLink="/app/review"
+      >
+        <mat-icon color="white">rate_review</mat-icon>
+        <span class="nav-caption"
+          >&nbsp; Review</span
+        >
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+      <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+          <ul class="navbar-nav  ml-auto">
+          <mat-icon color="white">account_circle</mat-icon><span color="white">{{session.firstname}} {{session.lastname}}</span>
+          </ul>
+        </nav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

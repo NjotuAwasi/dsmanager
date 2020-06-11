@@ -1,0 +1,48 @@
+<div class="reviews" *ngIf="show">
+    <div class="row blockquote review-item">
+        <div class="col-md-3 text-center">
+            <img class="rounded-circle reviewer" src="http://standaloneinstaller.com/upload/avatar.png">
+            <div class="caption">
+                <small>by {{this.student.users1.firstname}}</small>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <h4>My review</h4>
+            <div class="ratebox">
+                <star-rating value="{{this.student.review.rating}}" checkedcolor="red" uncheckedcolor="black"
+                    size="24px" readonly="false"></star-rating>
+            </div>
+            <p class="review-text">{{this.student.review.comment}}</p>
+
+            <small class="review-date">{{this.student.review.datecreated}}</small>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <form accept-charset="UTF-8" action="" method="post">
+        <input id="ratings-hidden" name="rating" type="hidden">
+        <textarea name="comment" [(ngModel)]="student.review.comment" class="form-control animated" cols="50" id="new-review"
+            placeholder="Enter your review here..." rows="5"></textarea>
+
+        <div class="text-right">
+            <div class="stars starrr" data-rating="0"></div>
+            <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+
+        </div>
+    </form>
+    <h6>Rate your school</h6>
+    <mat-form-field>
+        <mat-label>Rating</mat-label>
+        <select matNativeControl required [(ngModel)]="student.review.rating" name="rating">
+            <option  value="1">1</option>
+            <option  value="2">2</option>
+            <option  value="3">3</option>
+            <option  value="4">4</option>
+            <option  value="5">5</option>
+        </select>
+    </mat-form-field><br>
+
+    <button mat-raised-button color="primary" style="margin-top: 5px; float: right;" (click)="processForm()">Save</button>
+</div>

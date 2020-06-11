@@ -1,0 +1,28 @@
+
+  
+
+  mat-sidenav{
+    background-color: rgb(32, 32, 43);
+  }  
+  mat-sidenav-container{
+      height: 100%;
+  }
+
+  .active-list-item {
+    background-color: gray !important; /* Note: You could also use a custom theme */
+  }
+  .hover{
+      color:white;
+  }
+.mat-drawer.mat-drawer-side {
+    z-index: 1!important;
+}
+
+.mat-drawer-content {
+    z-index: auto!important;
+}
+
+// .mat-drawer-container {
+//     z-index: auto!important;
+// }
+  

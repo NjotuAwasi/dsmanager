@@ -1,0 +1,27 @@
+<div class="container-fluid"  style="width: 90%">
+    <h1 style="text-align: center">Schedule a class</h1>
+
+    <mat-form-field>
+        <mat-label>Select Instructor</mat-label>
+        <mat-select>
+          <mat-option name="instructor" *ngFor="let ins of instructors" [value]="ins.users1.id" (click)="option(ins.instructorPK.id)">
+            {{ins.users1.email}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+    <ejs-schedule currentView="Month" [eventSettings]="eventObject">
+        <!-- <ng-template #editorTemplate let-data>
+            <table class="custom-event-editor" width="100%" cellpadding="5">
+                <tbody>
+                    <tr>
+                        <td class = "e-textlabel">Summary</td>
+                        <td colspan="4">
+                            <input id="subject" class="e-field e-input" type="text" value="{{data.subject}}" data-name="subject" style="width: 100%"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template> -->
+    </ejs-schedule>
+</div>

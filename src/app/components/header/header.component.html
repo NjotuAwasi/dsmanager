@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="inputSideNav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    
+      <a class="nav-link" style="cursor: pointer;" (click) = "authService.logout()">Logout</a>
+      <a class="nav-link" style="cursor: pointer;" style="color: white" routerLink="/">Home</a>
+      <span><label for="">
+        <select #langselect (change)="translate.use(langselect.value)">
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{lang}}</option>
+        </select>
+      </label></span>
+  </mat-toolbar-row>
+</mat-toolbar>

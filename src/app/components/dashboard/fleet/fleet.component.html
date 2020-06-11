@@ -1,0 +1,92 @@
+<button mat-raised-button color="primary" (click)="undefine()" data-toggle="modal" data-target="#myModal">Add
+    Vehicle</button>
+<br>
+<div *ngFor="let car of cars">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{ car.model }}</mat-card-title>
+            <mat-card-subtitle>{{ car.type }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image
+            src="https://content3.jdmagicbox.com/comp/vijayawada/b2/0866px866.x866.160510190939.f4b2/catalogue/satish-car-driving-school-singh-nagar-vijayawada-motor-training-schools-2ju22.jpg"
+            alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <p>
+                Brand: {{ car.brand }}<br>
+                Plate: {{ car.plate }}<br>
+                Instructor: {{ car.instructor.users1.email }}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div style="float: right;">
+                <mat-icon style="cursor: pointer;">remove_red_eye</mat-icon>
+                <mat-icon color="primary" style="cursor: pointer;" data-toggle="modal" data-target="#myModal"
+                    (click)="updateCar(car.id)">edit</mat-icon>
+                <mat-icon color="warn" style="cursor: pointer;" (click)="openDialog(car.id)">delete</mat-icon>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Vehicle Form</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form #form="ngForm" (ngSubmit)="processForm()">
+                    <div style="width: 48%; display: inline-block">
+                        <mat-form-field>
+                            <input matInput name="model" placeholder="model" [(ngModel)]="car.model" />
+                        </mat-form-field>
+                    </div>&nbsp; &nbsp; &nbsp;
+                    <div style="width: 48%; display: inline-block">
+                        <mat-form-field>
+                            <input matInput name="brand" placeholder="brand" [(ngModel)]="car.brand " />
+                        </mat-form-field>
+                    </div>
+                    <div style="width: 48%; display: inline-block">
+                        <mat-form-field>
+                            <input matInput name="plate" placeholder="Plate" [(ngModel)]="car.plate " />
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        Type:
+                        <input type="radio" name="type" [(ngModel)]="car.type" value="manual">Manual
+                        <input type="radio" name="type" [(ngModel)]="car.type" value="automatic">Automatic
+                    </div>
+                    <mat-form-field>
+                            <mat-label>Select Instructor</mat-label>
+                            <mat-select>
+                              <mat-option name="instructor" *ngFor="let ins of instructors" [value]="ins.users1.id" (click)="option(ins.instructorPK.id)">
+                                {{ins.users1.email}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    <div>
+                        <input type="file">
+                    </div>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="{{ 'HOME.Save' | translate }}">
+                    </div>
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">{{ 'HOME.Close' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,63 @@
+<button mat-raised-button color="primary" (click)="undefine()" data-toggle="modal" data-target="#myModal">Add
+    Session</button>
+<br>
+<div *ngFor="let session of sessions;">
+    <mat-card class="example-card">
+        <mat-card-content>
+            <p>Start Date: {{session.startdate}}</p>
+            <p>Endate: {{session.enddate}}</p>
+            <p>Description: {{session.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <div style="float: right;">
+                <mat-icon style="cursor: pointer;">remove_red_eye</mat-icon>
+                <mat-icon color="primary" style="cursor: pointer;" data-toggle="modal" data-target="#myModal"
+                    (click)="updateSession(session.id)">edit</mat-icon>
+                <mat-icon color="warn" style="cursor: pointer;" (click)="openDialog(session.id)">delete</mat-icon>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Session Form</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form #form="ngForm" (ngSubmit)="processForm()">
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="startdate" [min]="minDate" [max]="maxDate" [(ngModel)]="sess.startdate"
+                            [matDatepicker]="picker1" placeholder="Start Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="enddate" [min]="minDate" [max]="maxDate" [(ngModel)]="sess.enddate"
+                            [matDatepicker]="picker2" placeholder="Start Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi #picker></mat-datepicker>
+                    </mat-form-field>
+                    <textarea matInput name="description" placeholder="Session Description"
+                        [(ngModel)]="sess.description"></textarea>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="{{ 'HOME.Save' | translate }}">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">{{ 'HOME.Close' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

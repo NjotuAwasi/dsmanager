@@ -1,0 +1,134 @@
+<div>
+    <mat-radio-group class="example-radio-group" [formControl]="status">
+      <label>Status: &nbsp; &nbsp;</label>
+      <mat-radio-button value="over">Active &nbsp; &nbsp; &nbsp; &nbsp;</mat-radio-button>
+      <mat-radio-button value="side">Complete &nbsp; &nbsp; &nbsp; &nbsp;</mat-radio-button>
+      <mat-radio-button value="all">all</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="container-fluid">
+  
+  </div>
+  <div class="container-fluid">
+    <div style="width: 20%; display: inline-block">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+      </mat-form-field>
+    </div>
+    <div style="width: 20%; display: inline-block; margin-left: 1%">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+      </mat-form-field>
+    </div><br>
+    <button mat-raised-button color="primary" (click)="undefine()" data-toggle="modal" data-target="#myModal">Add Instructor</button>
+  </div>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- ID Column -->
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.users1.firstname }}</td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.users1.lastname }}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let row">{{ row.users1.email }}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+        <td mat-cell *matCellDef="let row">{{ row.users1.gender }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+        <td mat-cell *matCellDef="let row" [style.color]="row.color">
+          <mat-icon style="cursor: pointer; display: inline;" color="primary" (click)="updateInstructor(row.instructorPK.id)"
+            data-toggle="modal" data-target="#myModal">edit</mat-icon>
+          <mat-icon style="cursor: pointer" color="warn" (click)="openDialog(row.instructorPK.id)">delete</mat-icon>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="open($event, row.instructorPK.id)"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Instructor Form</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form #form="ngForm" (ngSubmit)="processForm()">
+            <div style="width: 48%; display: inline-block">
+              <mat-form-field>
+                <input matInput name="firstname" placeholder="First Name" [(ngModel)]="instructor.users1.firstname" />
+              </mat-form-field>
+            </div>&nbsp; &nbsp; &nbsp;
+            <div style="width: 48%; display: inline-block">
+              <mat-form-field>
+                <input matInput name="lastname" placeholder="Last Name" [(ngModel)]="instructor.users1.lastname " />
+              </mat-form-field>
+            </div>
+            <div style="width: 48%; display: inline-block">
+              <mat-form-field>
+                <input matInput name="email" placeholder="Email" [(ngModel)]="instructor.users1.email" />
+              </mat-form-field>
+            </div>&nbsp; &nbsp; &nbsp;
+            <div style="width: 48%; display: inline-block">
+              <mat-form-field>
+                <input matInput name="phone" placeholder="Phone" [(ngModel)]="instructor.users1.phone " />
+              </mat-form-field>
+            </div>
+            <div>
+              Gender:
+              <input type="radio" name="gender" [(ngModel)]="instructor.users1.gender" value="male">Male
+              <input type="radio" name="gender" [(ngModel)]="instructor.users1.gender" value="female">Female
+            </div>
+            <mat-form-field class="example-full-width">
+              <input matInput name="birthdate" [min]="minDate" [max]="maxDate" [(ngModel)]="instructor.users1.birthdate"
+                [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>
+            <div style="width: 48%; display: inline-block">
+              <mat-form-field>
+                <input matInput name="login" placeholder="Login" [(ngModel)]="instructor.users1.login " />
+              </mat-form-field>
+            </div>
+            <div>
+              <input type="file" (change)="onFile($event)">
+            </div>
+            <div>
+              <input class="btn btn-primary" type="submit" value="save">
+            </div>
+          </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>

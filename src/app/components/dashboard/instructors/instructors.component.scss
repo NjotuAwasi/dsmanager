@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 15%;
+  }
+  .example-radio-group {
+    display: block;
+    border: 1px solid #555;
+    margin: 20px;
+    padding: 10px;
+  }
+  table tr:hover {
+    background: lightblue;
+    cursor: cell;
+}
+.mat-elevation-z8{
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+
